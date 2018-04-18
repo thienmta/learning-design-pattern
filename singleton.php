@@ -8,7 +8,8 @@ class WifiCompany {
 		if ( self::$checkRole == null ) {
 			self::$checkRole = new WifiCompany();
 			return self::$checkRole;
-		} else {
+		}
+		else {
 			echo "<b>Only admin can edit!</b>";
 		}
 	}
@@ -30,4 +31,14 @@ class WifiCompany {
 		$this->password = $password;
 	}
 }
+
+$manager = WifiCompany::getInstance();
+$manager->setWifiInfomation("deha-soft", "12345678");
+$manager->getWifiInfomation();
+
+$employee = WifiCompany::getInstance();
+$employee->setWifiInfomation("deha", "123");
+$employee->getWifiInfomation();
+
+unset($manager, $employee);
 ?>
