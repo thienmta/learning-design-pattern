@@ -1,12 +1,12 @@
 <?php
-class WifiCompany {
+class WifiCompanySingleton {
 	static private $checkRole = null;
 	public $password;
 	public $username;
 
 	static function getInstance () {
 		if ( self::$checkRole == null ) {
-			self::$checkRole = new WifiCompany();
+			self::$checkRole = new WifiCompanySingleton();
 			return self::$checkRole;
 		}
 		else {
@@ -32,11 +32,11 @@ class WifiCompany {
 	}
 }
 
-$manager = WifiCompany::getInstance();
+$manager = WifiCompanySingleton::getInstance();
 $manager->setWifiInfomation("deha-soft", "12345678");
 $manager->getWifiInfomation();
 
-$employee = WifiCompany::getInstance();
+$employee = WifiCompanySingleton::getInstance();
 $employee->setWifiInfomation("deha", "123");
 $employee->getWifiInfomation();
 
