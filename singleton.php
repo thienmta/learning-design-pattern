@@ -1,8 +1,8 @@
 <?php
 class WifiCompanySingleton {
 	static private $checkRole = null;
-	public $password;
-	public $username;
+	protected $password;
+	protected $username;
 
 	static function getInstance () {
 		if ( self::$checkRole == null ) {
