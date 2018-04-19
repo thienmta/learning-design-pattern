@@ -1,23 +1,19 @@
 <?php
 class WifiCompanySingleton {
 	static private $checkRole = null;
-	protected $password;
-	protected $username;
+	private $password;
+	private $username;
 
 	static function getInstance () {
 		if ( self::$checkRole == null ) {
-			self::$checkRole = new WifiCompanySingleton();
-			return self::$checkRole;
+			self::$checkRole = new self();
 		}
-		else {
-			echo "<b>Only admin can edit!</b>";
-		}
+		return self::$checkRole;
 	}
 
 	function setWifiInfomation ( $username, $password ) {
 		$this->username = $username;
 		$this->password = $password;
-		$this->checkRole = 1;
 	}
 
 	function getWifiInfomation () {
@@ -37,7 +33,6 @@ $manager->setWifiInfomation("deha-soft", "12345678");
 $manager->getWifiInfomation();
 
 $employee = WifiCompanySingleton::getInstance();
-$employee->setWifiInfomation("deha", "123");
 $employee->getWifiInfomation();
 
 unset($manager, $employee);
