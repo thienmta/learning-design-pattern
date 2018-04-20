@@ -1,5 +1,9 @@
 <?php
-class Autoperson
+interface Person {
+  public function __construct($firstName, $lastName);
+  public function getNamePerson();
+}
+class Maleperson implements Person
 {
   private $firstName;
   private $lastName;
@@ -10,21 +14,48 @@ class Autoperson
     $this->lastName = $lastName;
   }
   
-  public function getMakeAndModel()
+  public function getNamePerson()
   {
-    return $this->firstName . ' ' . $this->lastName;
+    return 'Male: '.$this->firstName . ' ' . $this->lastName;
   }
 }
 
-class AutomobileFactory
+class Femaleperson implements Person
 {
-  public static function create($firstName, $lastName)
+  private $firstName;
+  private $lastName;
+  
+  public function __construct($firstName, $lastName)
   {
-    return new Autoperson($firstName, $lastName);
+    $this->firstName = $firstName;
+    $this->lastName = $lastName;
+  }
+  
+  public function getNamePerson()
+  {
+    return 'Female: '.$this->firstName . ' ' . $this->lastName;
   }
 }
 
-$thien = AutomobileFactory::create('Nguyen Van', 'Thien');
-echo $thien->getMakeAndModel()."<br>";
-$yen = AutomobileFactory::create('Nguyen Hoang', 'Yen');
-echo $yen->getMakeAndModel()."<br>";
+class AutoPerson
+{
+  public function create($sex, $firstName, $lastName)
+  {
+    switch ($sex) {
+      case 'male':
+        return new Maleperson($firstName, $lastName);
+        break;
+      case 'female':
+        return new Femaleperson($firstName, $lastName);
+        break;
+      default:
+        return ;
+        break;
+    }
+  }
+}
+
+$thien = AutoPerson::create('male', 'Nguyen Van', 'Thien');
+echo $thien->getNamePerson()."<br>";
+$yen = AutoPerson::create('female', 'Nguyen Hoang', 'Yen');
+echo $yen->getNamePerson()."<br>";
