@@ -4,9 +4,11 @@ class WifiCompanySingleton {
 	private $password;
 	private $username;
 
+	private function __construct() {}
+
 	static function getInstance () {
 		if ( self::$checkRole == null ) {
-			self::$checkRole = new self();
+			self::$checkRole = new WifiCompanySingleton();
 		}
 		return self::$checkRole;
 	}
@@ -36,4 +38,8 @@ $employee = WifiCompanySingleton::getInstance();
 $employee->getWifiInfomation();
 
 unset($manager, $employee);
+
+$test = new WifiCompanySingleton();
+$test->setWifiInfomation("deha", "12");
+$test->getWifiInfomation();
 ?>
